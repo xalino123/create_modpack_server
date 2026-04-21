@@ -1,0 +1,149 @@
+---- Minecraft Crash Report ----
+
+// Lets see if this is repro or cosmic radiation
+Please make sure this issue is not caused by Sable before reporting it to other mod authors.
+If you cannot reproduce it without Sable, file a report on the issue tracker
+https://github.com/ryanhcode/sable/issues
+
+// Why did you do that?
+
+Time: 2026-04-20 15:07:23
+Description: Exception in server tick loop
+
+java.lang.NullPointerException: Cannot invoke "java.lang.Comparable.compareTo(Object)" because "pivot" is null
+	at java.base/java.util.ComparableTimSort.binarySort(ComparableTimSort.java:262) ~[?:?] {}
+	at java.base/java.util.ComparableTimSort.sort(ComparableTimSort.java:189) ~[?:?] {}
+	at java.base/java.util.Arrays.sort(Arrays.java:1104) ~[?:?] {re:mixin}
+	at java.base/java.util.Arrays.sort(Arrays.java:1298) ~[?:?] {re:mixin}
+	at java.base/java.util.ArrayList.sortRange(ArrayList.java:1817) ~[?:?] {re:mixin}
+	at java.base/java.util.ArrayList.sort(ArrayList.java:1810) ~[?:?] {re:mixin}
+	at java.base/java.util.Collections.sort(Collections.java:145) ~[?:?] {re:mixin}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.nbt.StringTagVisitor.visitCompound(StringTagVisitor.java:111) ~[server-1.21.1-20240808.144430-srg.jar%23144!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.nbt.CompoundTag.accept(CompoundTag.java:554) ~[server-1.21.1-20240808.144430-srg.jar%23144!/:?] {re:computing_frames,re:classloading,re:mixin}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.nbt.StringTagVisitor.visit(StringTagVisitor.java:15) ~[server-1.21.1-20240808.144430-srg.jar%23144!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.nbt.Tag.getAsString(Tag.java:50) ~[server-1.21.1-20240808.144430-srg.jar%23144!/:?] {re:computing_frames,re:classloading,re:mixin}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.nbt.CompoundTag.toString(CompoundTag.java:479) ~[server-1.21.1-20240808.144430-srg.jar%23144!/:?] {re:computing_frames,re:classloading,re:mixin}
+	at TRANSFORMER/carryon@2.2.4/tschipp.carryon.CarryOnCommon.potionLevel(CarryOnCommon.java:211) ~[carryon-neoforge-1.21.1-2.2.4.4.jar%23148!/:2.2.4.4] {re:classloading}
+	at TRANSFORMER/carryon@2.2.4/tschipp.carryon.CarryOnCommon.onCarryTick(CarryOnCommon.java:136) ~[carryon-neoforge-1.21.1-2.2.4.4.jar%23148!/:2.2.4.4] {re:classloading}
+	at TRANSFORMER/carryon@2.2.4/tschipp.carryon.events.CommonEvents.onServerTick(CommonEvents.java:181) ~[carryon-neoforge-1.21.1-2.2.4.4.jar%23148!/:2.2.4.4] {re:classloading}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar%2362!/:?] {}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:328) ~[bus-8.0.5.jar%2362!/:?] {}
+	at TRANSFORMER/neoforge@21.1.227/net.neoforged.neoforge.event.EventHooks.fireServerTickPost(EventHooks.java:1020) ~[neoforge-21.1.227-universal.jar%23145!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:943) ~[server-1.21.1-20240808.144430-srg.jar%23144!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder-common.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:balm.neoforge.mixins.json:MinecraftServerMixin from mod balm,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:707) [server-1.21.1-20240808.144430-srg.jar%23144!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder-common.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:balm.neoforge.mixins.json:MinecraftServerMixin from mod balm,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) [server-1.21.1-20240808.144430-srg.jar%23144!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder-common.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:balm.neoforge.mixins.json:MinecraftServerMixin from mod balm,pl:mixin:A}
+	at java.base/java.lang.Thread.run(Thread.java:1474) [?:?] {re:mixin}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 25.0.1, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode, sharing), Oracle Corporation
+	Memory: 3109334960 bytes (2965 MiB) / 8589934592 bytes (8192 MiB) up to 34359738368 bytes (32768 MiB)
+	CPUs: 24
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) Ultra 9 285K
+	Identifier: Intel64 Family 6 Model 198 Stepping 2
+	Microarchitecture: unknown
+	Frequency (GHz): 3.69
+	Number of physical packages: 1
+	Number of physical CPUs: 24
+	Number of logical CPUs: 24
+	Graphics card #0 name: Intel(R) Graphics
+	Graphics card #0 vendor: Intel Corporation
+	Graphics card #0 VRAM (MiB): 2048.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 32.0.101.8425
+	Graphics card #1 name: NVIDIA GeForce RTX 5080
+	Graphics card #1 vendor: NVIDIA
+	Graphics card #1 VRAM (MiB): 16303.00
+	Graphics card #1 deviceId: VideoController2
+	Graphics card #1 versionInfo: 32.0.15.9621
+	Memory slot #0 capacity (MiB): 65536.00
+	Memory slot #0 clockSpeed (GHz): 6.40
+	Memory slot #0 type: Unknown
+	Memory slot #1 capacity (MiB): 65536.00
+	Memory slot #1 clockSpeed (GHz): 6.40
+	Memory slot #1 type: Unknown
+	Virtual memory max (MiB): 138628.72
+	Virtual memory used (MiB): 32483.71
+	Swap memory total (MiB): 8192.00
+	Swap memory used (MiB): 3.02
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 615390.94, total: 1802452.00
+	Space in storage for workdir (MiB): available: 615390.94, total: 1802452.00
+	JVM Flags: 2 total; -Xmx32G -Xms8G
+	Server Running: true
+	Player Count: 3 / 20; [ServerPlayer['AntoBlazer'/20577, l='ServerLevel[New World]', x=-1521.00, y=63.00, z=334.50], ServerPlayer['Only_Kam1'/24131, l='ServerLevel[New World]', x=-1061.81, y=63.00, z=179.30], ServerPlayer['xalino123'/8, l='ServerLevel[New World]', x=-1061.06, y=63.00, z=183.43]]
+	Active Data Packs: create:dynamic_data, vanilla, mod_data, mod/kuma_api (incompatible), mod/terrablender (incompatible), mod/geckolib, mod/createdeco (incompatible), mod/ohthetreesyoullgrow (incompatible), mod/jei (incompatible), mod/corgilib (incompatible), mod/biomeswevegone, mod/commonnetworking (incompatible), mod/aeronautics (incompatible), mod/aeronautics_bundled, mod/sophisticatedcore (incompatible), mod/curios (incompatible), mod/flywheel (incompatible), mod/ponder (incompatible), mod/sable, mod/sablecompanion, mod/create (incompatible), mod/waystones (incompatible), mod/journeymap (incompatible), mod/neoforge, mod/create_recycle_everything, mod/storagedrawers, mod/naturescompass (incompatible), mod/glitchcore (incompatible), mod/createcasing (incompatible), mod/veil (incompatible), mod/create_confectionery, mod/sophisticatedbackpacks (incompatible), mod/simulated (incompatible), mod/createliquidfuel (incompatible), mod/architectury (incompatible), mod/creategoggles (incompatible), mod/balm (incompatible), mod/carryon (incompatible), mod/journeymap_api (incompatible), mod/offroad (incompatible), mod/ironchest
+	Available Data Packs: bundle, trade_rebalance, vanilla, mod/aeronautics (incompatible), mod/aeronautics_bundled, mod/architectury (incompatible), mod/balm (incompatible), mod/biomeswevegone, mod/carryon (incompatible), mod/commonnetworking (incompatible), mod/corgilib (incompatible), mod/create (incompatible), mod/create_confectionery, mod/create_recycle_everything, mod/createcasing (incompatible), mod/createdeco (incompatible), mod/creategoggles (incompatible), mod/createliquidfuel (incompatible), mod/curios (incompatible), mod/flywheel (incompatible), mod/geckolib, mod/glitchcore (incompatible), mod/ironchest, mod/jei (incompatible), mod/journeymap (incompatible), mod/journeymap_api (incompatible), mod/kuma_api (incompatible), mod/naturescompass (incompatible), mod/neoforge, mod/offroad (incompatible), mod/ohthetreesyoullgrow (incompatible), mod/ponder (incompatible), mod/sable, mod/sablecompanion, mod/simulated (incompatible), mod/sophisticatedbackpacks (incompatible), mod/sophisticatedcore (incompatible), mod/storagedrawers, mod/terrablender (incompatible), mod/veil (incompatible), mod/waystones (incompatible), mod_data, create:dynamic_data
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
+	World Seed: 6250261340824078620
+	Is Modded: Definitely; Server brand changed to 'neoforge'
+	Type: Dedicated Server (map_server.txt)
+	ModLauncher: 11.0.5+main.901c6ea8
+	ModLauncher launch target: forgeserver
+	ModLauncher services: 
+		sponge-mixin-0.15.2+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.42.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.42.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.42.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.5.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.5.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		architectury-13.0.8-neoforge.jar                  |Architectury                  |architectury                  |13.0.8              |Manifest: NOSIGNATURE
+		balm-neoforge-1.21.1-21.0.56.jar                  |Balm                          |balm                          |21.0.56             |Manifest: NOSIGNATURE
+		carryon-neoforge-1.21.1-2.2.4.4.jar               |Carry On                      |carryon                       |2.2.4               |Manifest: NOSIGNATURE
+		common-networking-neoforge-1.0.21-1.21.1.jar      |Common Networking             |commonnetworking              |1.0.21-1.21.1       |Manifest: NOSIGNATURE
+		Corgilib-NeoForge-1.21.1-5.0.0.9.jar              |CorgiLib                      |corgilib                      |5.0.0.9             |Manifest: NOSIGNATURE
+		create-1.21.1-6.0.9.jar                           |Create                        |create                        |6.0.9               |Manifest: NOSIGNATURE
+		dev.eriksonn.aeronautics.aeronautics-neoforge-1.21|Create Aeronautics            |aeronautics                   |1.0.2               |Manifest: NOSIGNATURE
+		create-aeronautics-bundled-1.21.1-1.0.2.jar       |Create Aeronautics            |aeronautics_bundled           |1.0.2               |Manifest: NOSIGNATURE
+		create-confectionery1.21.1_v1.1.2.jar             |Create Confectionery          |create_confectionery          |1.1.2               |Manifest: NOSIGNATURE
+		createdeco-2.1.3.jar                              |Create Deco                   |createdeco                    |2.1.3               |Manifest: NOSIGNATURE
+		Create Encased-1.21.1-1.8-ht2.jar                 |Create Encased                |createcasing                  |1.8-ht2             |Manifest: NOSIGNATURE
+		creategoggles-1.21.1-6.1.1-[NEOFORGE].jar         |Create Goggles                |creategoggles                 |6.1.1               |Manifest: NOSIGNATURE
+		createliquidfuel-2.1.1-1.21.1.jar                 |Create Liquid Fuel            |createliquidfuel              |2.1.1-1.21.1        |Manifest: NOSIGNATURE
+		dev.ryanhcode.offroad.offroad-neoforge-1.21.1-1.0.|Create Offroad                |offroad                       |1.0.2               |Manifest: NOSIGNATURE
+		dev.simulated_team.simulated.simulated-neoforge-1.|Create Simulated              |simulated                     |1.0.2               |Manifest: NOSIGNATURE
+		create_recycle_everything-1.0.1.jar               |Create: Recycle Everything    |create_recycle_everything     |1.0.0               |Manifest: NOSIGNATURE
+		curios-neoforge-9.5.1+1.21.1.jar                  |Curios API                    |curios                        |9.5.1+1.21.1        |Manifest: NOSIGNATURE
+		flywheel-neoforge-1.21.1-1.0.6.jar                |Flywheel                      |flywheel                      |1.0.6               |Manifest: NOSIGNATURE
+		geckolib-neoforge-1.21.1-4.8.4.jar                |GeckoLib 4                    |geckolib                      |4.8.4               |Manifest: NOSIGNATURE
+		GlitchCore-neoforge-1.21.1-2.1.0.0.jar            |GlitchCore                    |glitchcore                    |2.1.0.0             |Manifest: NOSIGNATURE
+		ironchest-1.21-neoforge-16.0.7.jar                |Iron Chests                   |ironchest                     |1.21-neoforge-16.0.7|Manifest: NOSIGNATURE
+		journeymap-neoforge-1.21.1-6.0.0-beta.63.jar      |Journeymap                    |journeymap                    |1.21.1-6.0.0-beta.63|Manifest: NOSIGNATURE
+		journeymap-api-neoforge-2.0.0-1.21.1-SNAPSHOT.jar |JourneyMap API                |journeymap_api                |2.0.0               |Manifest: NOSIGNATURE
+		jei-1.21.1-neoforge-19.27.0.336.jar               |Just Enough Items             |jei                           |19.27.0.336         |Manifest: NOSIGNATURE
+		kuma-api-neoforge-21.0.7+1.21.jar                 |KumaAPI                       |kuma_api                      |21.0.7              |Manifest: NOSIGNATURE
+		server-1.21.1-20240808.144430-srg.jar             |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		NaturesCompass-1.21.1-3.4.0-neoforge.jar          |Nature's Compass              |naturescompass                |1.21.1-3.4.0-neoforg|Manifest: NOSIGNATURE
+		neoforge-21.1.227-universal.jar                   |NeoForge                      |neoforge                      |21.1.227            |Manifest: NOSIGNATURE
+		Oh-The-Biomes-Weve-Gone-NeoForge-2.5.5.jar        |Oh The Biomes We've Gone      |biomeswevegone                |2.5.5               |Manifest: NOSIGNATURE
+		Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.3.0.jar |Oh The Trees You'll Grow      |ohthetreesyoullgrow           |5.3.0               |Manifest: NOSIGNATURE
+		ponder-neoforge-1.0.81+mc1.21.1.jar               |Ponder                        |ponder                        |1.0.81+mc1.21.1     |Manifest: NOSIGNATURE
+		sable-neoforge-1.21.1-1.0.5.jar                   |Sable                         |sable                         |1.0.5               |Manifest: NOSIGNATURE
+		sable-companion-common-1.21.1-1.4.2.jar           |Sable Companion               |sablecompanion                |1.4.2               |Manifest: NOSIGNATURE
+		sophisticatedbackpacks-1.21.1-3.25.40.1677.jar    |Sophisticated Backpacks       |sophisticatedbackpacks        |3.25.40             |Manifest: NOSIGNATURE
+		sophisticatedcore-1.21.1-1.4.24.1680.jar          |Sophisticated Core            |sophisticatedcore             |1.4.24              |Manifest: NOSIGNATURE
+		StorageDrawers-neoforge-1.21.1-13.11.4.jar        |Storage Drawers               |storagedrawers                |13.11.4             |Manifest: NOSIGNATURE
+		TerraBlender-neoforge-1.21.1-4.1.0.8.jar          |TerraBlender                  |terrablender                  |4.1.0.8             |Manifest: NOSIGNATURE
+		veil-neoforge-1.21.1-3.4.1.jar                    |Veil                          |veil                          |3.4.1               |Manifest: NOSIGNATURE
+		waystones-neoforge-1.21.1-21.1.29.jar             |Waystones                     |waystones                     |21.1.29             |Manifest: NOSIGNATURE
+	Crash Report UUID: a2cb100b-3f6c-456d-9035-f665b3730935
+	FML: 4.0.42
+	NeoForge: 21.1.227
